@@ -1,0 +1,6 @@
+[package]
+name = "loop_exam"
+version = "0.1.0"
+authors = ["neoflame99"]
+
+[dependencies]
