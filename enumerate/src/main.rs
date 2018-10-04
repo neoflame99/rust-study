@@ -79,21 +79,21 @@
 //}
 
 //-- enum example 5 : match with Option<T>
-//
-//fn plus_one(x : Option<i32>) -> Option<i32> {
-//   match x {  // match is exhaustive
-//         None   => None,
-//         Some(i)=> Some(i+1),
-//   }      
-//}
-//
-//fn main(){
-//   let five = Some(5);
-//   let six  = plus_one(five);
-//   let none = plus_one(None);
-//   println!(" value : {:?}, none {:?}", six, none);
-//   
-//}
+
+fn plus_one(x : Option<i32>) -> Option<i32> {
+   match x {  // match is exhaustive
+         None   => None,
+         Some(i)=> Some(i+1),
+   }      
+}
+
+fn main(){
+   let five = Some(5);
+   let six  = plus_one(five);
+   let none = plus_one(None);
+   println!(" six : {:?}, none {:?}", six, none);
+   println!(" value of six variable : {} ", six.unwrap());
+}
 
 //-- enum example 6 : match with placeholder that is like 'default' of switch in c++
 //
@@ -110,20 +110,20 @@
 //}
 
 //-- enum example 7 : match with 'if let'
-
-fn main(){
-   let some_u8_value = Some(0u8);
-   //match some_u8_value {
-   //      Some(3) => println!("three"),
-   //      _ => ()
-   //}
-
-//   if let Some(3) = some_u8_value { println!("three"); }
-
-     if let Some(3) = some_u8_value {
-        println!("three");
-     }
-     else {
-        println!("others");
-     }
-}
+//
+//fn main(){
+//   let some_u8_value = Some(0u8);
+//   //match some_u8_value {
+//   //      Some(3) => println!("three"),
+//   //      _ => ()
+//   //}
+//
+////   if let Some(3) = some_u8_value { println!("three"); }
+//
+//     if let Some(3) = some_u8_value {
+//        println!("three");
+//     }
+//     else {
+//        println!("others");
+//     }
+//}
