@@ -1,0 +1,6 @@
+[package]
+name = "rc_refcell"
+version = "0.1.0"
+authors = ["neoflame99 <neoflame99@gmail.com>"]
+
+[dependencies]
