@@ -7,6 +7,7 @@ pub struct Config{
     pub filename : String,
     pub case_sensitive: bool,
 }
+/*
 impl Config {
     pub fn new(args: &[String]) -> Result<Config, &'static str> {
         if args.len() < 3 {
@@ -20,7 +21,29 @@ impl Config {
             }
         )
     }
+}*/
+impl Config {
+    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
+        args.next();
+        let query = match args.next(){
+            Some(arg) => arg,
+            None      => return Err("Didn't get a query string"),
+        };
+        let filename = match args.next(){
+            Some(arg) => arg,
+            None      => return Err("Didn't get a file name"),
+        };
+
+        Ok(
+            Config {
+                query: query,
+                filename: filename,
+                case_sensitive : env::var("CASE_INSENSITIVE").is_err(),
+            }
+        )
+    }
 }
+
 
 pub fn run (config: Config)->Result<(), Box<dyn Error>>{
     //let contents = fs::read_to_string(config.filename).expect("Something went wrong reading the file");
@@ -32,7 +55,7 @@ pub fn run (config: Config)->Result<(), Box<dyn Error>>{
     //println!("With text:\n{}",contents);
     Ok(())
 }
-
+/*
 fn search<'a>(query: &str, contents: &'a str, case_sense : bool) -> Vec<&'a str>{
     let mut List  = Vec::new();
     if case_sense {
@@ -49,7 +72,28 @@ fn search<'a>(query: &str, contents: &'a str, case_sense : bool) -> Vec<&'a str>
         }
     }
     List
+} */
+fn search<'a>(query: &str, contents: &'a str, case_sense : bool) -> Vec<&'a str>{
+
+    if case_sense {
+        return contents.lines().filter(|line| line.contains(query)).collect();
+    }else {
+        return contents.lines()
+            .filter(|line| line.to_lowercase().contains(&query.to_lowercase()))
+            .collect();
+        /*
+        let mut List  = Vec::new();
+        for line in contents.lines() {
+            if line.to_lowercase().contains(&query.to_lowercase()) {
+                List.push(line);
+            }
+        }
+        return List;
+        */
+    }
+
 }
+
 
 #[cfg(test)]
 mod tests{
